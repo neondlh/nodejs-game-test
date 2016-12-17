@@ -1,7 +1,7 @@
-var Entity = require('./Entity.js');
-var Bullet = require('./Bullet.js');
+var Entity = require('./entity.js');
+var Bullet = require('./bullet.js');
 
-module.exports = function (id, playerList, bulletList){
+module.exports = function (id, playerList, bulletList, initPack){
   var self = Entity();
   self.id = id;
   self.number = "" + Math.floor(10 * Math.random());
@@ -14,6 +14,7 @@ module.exports = function (id, playerList, bulletList){
   self.maxSpd = 10;
   self.playerList = playerList;
   self.bulletList = bulletList;
+  self.initPack = initPack;
 
   var super_update = self.update;
   self.update = function(){
@@ -25,7 +26,7 @@ module.exports = function (id, playerList, bulletList){
   }
 
   self.shootBullet = function(angle){
-    var b = Bullet(self.id, angle, playerList, bulletList);
+    var b = Bullet(self.id, angle, playerList, bulletList, initPack);
     b.x = self.x;
     b.y = self.y;
   }
@@ -64,5 +65,11 @@ module.exports = function (id, playerList, bulletList){
   }
 
   playerList[self.id] = self;
+  initPack.player.push({
+    id:self.id,
+    x:self.x,
+    y:self.y,
+    number: self.number,
+  });
   return self;
 }

@@ -18,7 +18,8 @@
   "dependencies" :
   {
     "express": "latest",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "mongojs":"latest"
   },
   "license": "MIT"
 }

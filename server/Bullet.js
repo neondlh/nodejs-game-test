@@ -1,6 +1,6 @@
-var Entity = require('./Entity.js');
+var Entity = require('./entity.js');
 
-module.exports = function (parent, angle, playerList, bulletList){
+module.exports = function (parent, angle, playerList, bulletList, initPack){
   var self = Entity();
   self.id = Math.random();
   self.spdX = Math.cos(angle/180*Math.PI) * 10;
@@ -28,5 +28,10 @@ module.exports = function (parent, angle, playerList, bulletList){
   }
 
   bulletList[self.id] = self;
+  initPack.bullet.push({
+    id:self.id,
+    x:self.x,
+    y:self.y,
+  });
   return self;
 }
